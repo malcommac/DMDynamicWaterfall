@@ -7,7 +7,7 @@
 
 A demonstration of UICollectionView with waterfall (pinterest like) layout and UIKit Dynamics. Uses tiling in order to maintain high-performance even with ten thousand cells.
 
-![Animation](https://github.com/malcommac/DMDynamicWaterfall/blob/master/example_movie.gif)
+![Animation](https://raw2.github.com/malcommac/DMDynamicWaterfall/master/example_movie.gif)
 
 ## Requirements
 
