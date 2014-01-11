@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DMDynamicWaterfall"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "UICollectionView Waterfall Layout with UIKit Dynamics"
   s.description  = <<-DESC
                     A demonstration of UICollectionView with waterfall (pinterest like) layout and UIKit Dynamics. Uses tiling in order to maintain high-performance even with ten thousand cells.
