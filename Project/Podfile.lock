@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../DMDynamicWaterfall.podspec
 
 SPEC CHECKSUMS:
-  DMDynamicWaterfall: 582cfa9ef0b584cfbd81c9efd7b3b1906f73349f
+  DMDynamicWaterfall: 7666cfec2b46225d8d9081409e918d29f1fd02f2
 
 COCOAPODS: 0.29.0

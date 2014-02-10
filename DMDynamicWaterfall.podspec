@@ -11,16 +11,12 @@ Pod::Spec.new do |s|
   s.author       = { "Daniele Margutti" => "me@danielemargutti.com" }
   s.source       = { :git => "https://github.com/malcommac/DMDynamicWaterfall.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '7.0'
-  s.ios.deployment_target = '7.0'
-  # s.osx.deployment_target = '10.7'
+  s.platform     = :ios, '6.0'
+  s.ios.deployment_target = '6.0'
   s.requires_arc = true
 
   s.source_files = 'Classes/**/*.{h,m}'
 
   s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
   s.public_header_files = 'Classes/**/*.h'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
-  # s.dependency 'JSONKit', '~> 1.4'
 end

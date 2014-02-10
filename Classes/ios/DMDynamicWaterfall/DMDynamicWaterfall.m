@@ -44,20 +44,23 @@
 
 @implementation DMDynamicWaterfall
 
-@synthesize isDynamic;
-
 - (id)init {
     self = [super init];
     if (self) {
-		self.isDynamic = YES;
+		self.dynamic = YES;
     }
     return self;
 }
 
-- (void)setIsDynamic:(BOOL)aIsDynamic {
-	if (aIsDynamic != isDynamic) {
-		isDynamic = aIsDynamic;
-		if (!isDynamic) {
+- (void)setDynamic:(BOOL)dynamic {
+    if (![UIDynamicAnimator class]) {
+        _dynamic = NO; return;
+    }
+    
+	if (_dynamic != dynamic) {
+		_dynamic = dynamic;
+
+		if (!_dynamic) {
 			[dynamicAnimator removeAllBehaviors];
 			dynamicAnimator = nil;
 			visibleIndexPathsSet = nil;
@@ -89,8 +92,9 @@
 		[self prepareSectionLayout:sectIdx withNumberOfItems:itemsInSection];
 	}
 	
-	if (isDynamic)
+	if (_dynamic) {
 		[self prepareDynamicLayout];
+    }
 }
 
 - (CGRect)prepareSectionLayout:(NSUInteger) sectionIdx withNumberOfItems:(NSUInteger) numberOfItems {
@@ -234,14 +238,18 @@
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (!isDynamic)
+    if (!_dynamic) {
 		return [super layoutAttributesForItemAtIndexPath:indexPath];
+    }
+    
 	return [dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)visibleRect {
-	if (!isDynamic)
+	if (!_dynamic) {
 		return [self searchVisibleLayoutAttributesInRect:visibleRect];
+    }
+    
 	return [dynamicAnimator itemsInRect:visibleRect];
 }
 
@@ -300,9 +308,10 @@
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-	if (!isDynamic)
+	if (!_dynamic) {
 		return [super shouldInvalidateLayoutForBoundsChange:newBounds];
-	
+	}
+    
     UIScrollView *scrollView = self.collectionView;
     CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
     

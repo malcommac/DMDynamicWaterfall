@@ -90,11 +90,11 @@
 /**
  *  Datasource for dynamic waterfall layout
  */
-@property (nonatomic,assign) id <DMDynamicWaterfallDatasource>	dataSource;
+@property (nonatomic, assign) id <DMDynamicWaterfallDatasource>	dataSource;
 
 /**
  *  Yes to enable UIKitDynamics behavior for this layout
  */
-@property (nonatomic,assign) BOOL isDynamic;
+@property (nonatomic, assign, getter = isDynamic) BOOL dynamic;
 
 @end
