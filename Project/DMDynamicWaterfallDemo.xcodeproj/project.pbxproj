@@ -56,7 +56,6 @@
 		21BDB407187D882900A10B9A /* TestCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionViewCell.m; sourceTree = "<group>"; };
 		21CDB3CD188078C900DBCEE9 /* DMDynamicWaterfall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMDynamicWaterfall.h; path = ../../Classes/ios/DMDynamicWaterfall/DMDynamicWaterfall.h; sourceTree = "<group>"; };
 		21CDB3CE188078C900DBCEE9 /* DMDynamicWaterfall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMDynamicWaterfall.m; path = ../../Classes/ios/DMDynamicWaterfall/DMDynamicWaterfall.m; sourceTree = "<group>"; };
-		21CDB3CF188078C900DBCEE9 /* NSGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSGeometry.h; path = ../../Classes/ios/DMDynamicWaterfall/NSGeometry.h; sourceTree = "<group>"; };
 		21CDB3D11880AA8C00DBCEE9 /* TestCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCollectionHeaderView.h; sourceTree = "<group>"; };
 		21CDB3D21880AA8C00DBCEE9 /* TestCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionHeaderView.m; sourceTree = "<group>"; };
 		21CDB3D41880BA2700DBCEE9 /* TestCollectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCollectionFooterView.h; sourceTree = "<group>"; };
@@ -145,7 +144,6 @@
 			children = (
 				21CDB3CD188078C900DBCEE9 /* DMDynamicWaterfall.h */,
 				21CDB3CE188078C900DBCEE9 /* DMDynamicWaterfall.m */,
-				21CDB3CF188078C900DBCEE9 /* NSGeometry.h */,
 			);
 			name = DMDynamicWaterfall;
 			sourceTree = "<group>";
