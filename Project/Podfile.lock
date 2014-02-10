@@ -1,0 +1,14 @@
+PODS:
+  - DMDynamicWaterfall (0.1.5)
+
+DEPENDENCIES:
+  - DMDynamicWaterfall (from `../DMDynamicWaterfall.podspec`)
+
+EXTERNAL SOURCES:
+  DMDynamicWaterfall:
+    :path: ../DMDynamicWaterfall.podspec
+
+SPEC CHECKSUMS:
+  DMDynamicWaterfall: 7666cfec2b46225d8d9081409e918d29f1fd02f2
+
+COCOAPODS: 0.29.0

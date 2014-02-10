@@ -28,14 +28,13 @@
 //
 
 #import "DMDynamicWaterfall.h"
-#import "NSGeometry.h"
 
 @interface DMDynamicWaterfall() {
 	NSMutableArray			*sectionRects;
 	NSMutableArray			*columnRectsInSection;
 	
 	NSMutableArray			*layoutItemAttributes;
-	NSDictionary		*headerFooterItemAttributes;
+	NSDictionary            *headerFooterItemAttributes;
 	UIDynamicAnimator		*dynamicAnimator;
 	NSMutableSet			*visibleIndexPathsSet;
 	CGFloat					 latestDelta;
@@ -45,20 +44,23 @@
 
 @implementation DMDynamicWaterfall
 
-@synthesize isDynamic;
-
 - (id)init {
     self = [super init];
     if (self) {
-		self.isDynamic = YES;
+		self.dynamic = YES;
     }
     return self;
 }
 
-- (void) setIsDynamic:(BOOL)aIsDynamic {
-	if (aIsDynamic != isDynamic) {
-		isDynamic = aIsDynamic;
-		if (!isDynamic) {
+- (void)setDynamic:(BOOL)dynamic {
+    if (![UIDynamicAnimator class]) {
+        _dynamic = NO; return;
+    }
+    
+	if (_dynamic != dynamic) {
+		_dynamic = dynamic;
+
+		if (!_dynamic) {
 			[dynamicAnimator removeAllBehaviors];
 			dynamicAnimator = nil;
 			visibleIndexPathsSet = nil;
@@ -71,13 +73,13 @@
 
 #pragma mark - Layout Overrides -
 
-- (CGSize) collectionViewContentSize {
+- (CGSize)collectionViewContentSize {
 	CGRect lastSectionRect = [[sectionRects lastObject] CGRectValue];
-	CGSize size = CGSizeMake(NSWidth(self.collectionView.frame),NSMaxY(lastSectionRect));
+	CGSize size = CGSizeMake(CGRectGetWidth(self.collectionView.frame),CGRectGetMaxY(lastSectionRect));
 	return size;
 }
 
-- (void) prepareLayout {
+- (void)prepareLayout {
 	NSUInteger numberOfSections = self.collectionView.numberOfSections;
 	sectionRects = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
 	columnRectsInSection = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
@@ -90,11 +92,12 @@
 		[self prepareSectionLayout:sectIdx withNumberOfItems:itemsInSection];
 	}
 	
-	if (isDynamic)
+	if (_dynamic) {
 		[self prepareDynamicLayout];
+    }
 }
 
-- (CGRect) prepareSectionLayout:(NSUInteger) sectionIdx withNumberOfItems:(NSUInteger) numberOfItems {
+- (CGRect)prepareSectionLayout:(NSUInteger) sectionIdx withNumberOfItems:(NSUInteger) numberOfItems {
 	UICollectionView *cView = self.collectionView;
 	UIEdgeInsets sectionInsets = [self.dataSource collectionView:cView layout:self insetForSectionAtIndex:sectionIdx];
 	UIEdgeInsets interItemInsets = [self.dataSource collectionView:cView layout:self insetForItemsInSection:sectionIdx];
@@ -105,10 +108,10 @@
 	CGRect previousSectionRect = [self rectForSectionAtIndex:sectionIdx-1];
 	CGRect sectionRect;
 	sectionRect.origin.x = sectionInsets.left;
-	sectionRect.origin.y = NSMaxY(previousSectionRect)+sectionInsets.top;
+	sectionRect.origin.y = CGRectGetMaxY(previousSectionRect)+sectionInsets.top;
 	
 	NSUInteger numberOfColumns = [self.dataSource collectionView:cView layout:self numberOfColumnsInSection:sectionIdx];
-	sectionRect.size.width =	NSWidth(cView.frame) - NSHorizontalInset(sectionInsets);
+	sectionRect.size.width =	CGRectGetWidth(cView.frame) - (sectionInsets.left + sectionInsets.right);
 	
 	CGFloat columnSpace = sectionRect.size.width - ((interItemInsets.left*(numberOfColumns-1)) + (interItemInsets.left*(numberOfColumns-1)));
 	CGFloat columnWidth = (columnSpace/numberOfColumns);
@@ -180,14 +183,14 @@
 		[layoutItemAttributes[sectionIdx] addObject:footerAttributes];
 	//NSLog(@"Footer: %@",NSStringFromCGRect(footerFrame));
 
-	sectionRect.size.height = (NSMaxY(footerFrame)-NSMinY(headerFrame))+sectionInsets.bottom;
+	sectionRect.size.height = (CGRectGetMaxY(footerFrame) - CGRectGetMinY(headerFrame))+sectionInsets.bottom;
 	[sectionRects addObject:[NSValue valueWithCGRect:sectionRect]];
 	
 	//NSLog(@"Section %d rect: %@",sectionIdx,NSStringFromCGRect(sectionRect));
 	return sectionRect;
 }
 
-- (CGFloat) heightOfItemsInSection:(NSUInteger) sectionIdx {
+- (CGFloat)heightOfItemsInSection:(NSUInteger) sectionIdx {
 	CGFloat maxHeightBetweenColumns = 0.0f;
 	NSArray *columnsInSection = columnRectsInSection[sectionIdx];
 	for (NSUInteger columnIdx = 0; columnIdx < columnsInSection.count; ++columnIdx) {
@@ -197,22 +200,22 @@
 	return maxHeightBetweenColumns;
 }
 
-- (NSUInteger) numberOfItemsInColumn:(NSUInteger) columnIdx ofSection:(NSInteger) sectionIdx {
+- (NSUInteger)numberOfItemsInColumn:(NSUInteger) columnIdx ofSection:(NSInteger) sectionIdx {
 	return [columnRectsInSection[sectionIdx][columnIdx] count];
 }
 
-- (CGFloat) lastItemOffsetInColumn:(NSUInteger) columnIdx inSection:(NSInteger) sectionIdx {
+- (CGFloat)lastItemOffsetInColumn:(NSUInteger) columnIdx inSection:(NSInteger) sectionIdx {
 	NSArray *itemsInColumn = columnRectsInSection[sectionIdx][columnIdx];
 	if (itemsInColumn.count == 0) {
 		CGRect headerFrame = [headerFooterItemAttributes[UICollectionElementKindSectionHeader][sectionIdx] frame];
-		return NSMaxY(headerFrame);
+		return CGRectGetMaxY(headerFrame);
 	} else {
 		CGRect lastItemRect = [[itemsInColumn lastObject] CGRectValue];
-		return NSMaxY(lastItemRect);
+		return CGRectGetMaxY(lastItemRect);
 	}
 }
 
-- (NSUInteger) preferredColumnIndexInSection:(NSInteger) sectionIdx {
+- (NSUInteger)preferredColumnIndexInSection:(NSInteger) sectionIdx {
 	NSUInteger shortestColumnIdx = 0;
 	CGFloat heightOfShortestColumn = CGFLOAT_MAX;
 	for (NSUInteger columnIdx = 0; columnIdx < [columnRectsInSection[sectionIdx] count]; ++columnIdx) {
@@ -225,7 +228,7 @@
 	return shortestColumnIdx;
 }
 
-- (CGRect) rectForSectionAtIndex:(NSInteger) sectionIdx {
+- (CGRect)rectForSectionAtIndex:(NSInteger) sectionIdx {
 	if (sectionIdx < 0 || sectionIdx >= sectionRects.count) return CGRectZero;
 	return [sectionRects[sectionIdx] CGRectValue];
 }
@@ -234,15 +237,19 @@
 	return headerFooterItemAttributes[kind][indexPath.section];
 }
 
--(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (!isDynamic)
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (!_dynamic) {
 		return [super layoutAttributesForItemAtIndexPath:indexPath];
+    }
+    
 	return [dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)visibleRect {
-	if (!isDynamic)
+	if (!_dynamic) {
 		return [self searchVisibleLayoutAttributesInRect:visibleRect];
+    }
+    
 	return [dynamicAnimator itemsInRect:visibleRect];
 }
 
@@ -300,10 +307,11 @@
     }];
 }
 
--(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-	if (!isDynamic)
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+	if (!_dynamic) {
 		return [super shouldInvalidateLayoutForBoundsChange:newBounds];
-	
+	}
+    
     UIScrollView *scrollView = self.collectionView;
     CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
     
@@ -331,7 +339,7 @@
 
 #pragma mark - Helper Methods -
 
-- (NSArray *) searchVisibleLayoutAttributesInRect:(CGRect) visibleRect {
+- (NSArray *)searchVisibleLayoutAttributesInRect:(CGRect) visibleRect {
 	NSMutableArray *itemAttrs = [[NSMutableArray alloc] init];
 	NSIndexSet *visibleSections = [self sectionIndexesInRect:visibleRect];
 	[visibleSections enumerateIndexesUsingBlock:^(NSUInteger sectionIdx, BOOL *stop) {
@@ -345,7 +353,7 @@
 	return itemAttrs;
 }
 
-- (NSIndexSet *) sectionIndexesInRect:(CGRect) aRect {
+- (NSIndexSet *)sectionIndexesInRect:(CGRect) aRect {
 	CGRect theRect = aRect;
 	NSMutableIndexSet *visibleIndexes = [[NSMutableIndexSet alloc] init];
 	NSUInteger numberOfSections = self.collectionView.numberOfSections;
@@ -379,7 +387,7 @@
 		return headerHeight;
 	} else {
 		CGRect lastItemInColumn = [[itemsInColumn lastObject] CGRectValue];
-		return NSMaxY(lastItemInColumn);
+		return CGRectGetMaxY(lastItemInColumn);
 	}
 }
 
@@ -397,7 +405,7 @@
 - (NSUInteger) heightForColumn:(NSUInteger) columnIdx inSection:(NSUInteger) sectionIdx {
 	CGFloat sectionYStartOffset = [self rectForSectionAtIndex:sectionIdx].origin.y;
 	CGRect lastColumnItemRect = [[columnRectsInSection[sectionIdx][columnIdx] lastObject] CGRectValue];
-	CGFloat lastColumnItemFrame = NSMaxY(lastColumnItemRect);
+	CGFloat lastColumnItemFrame = CGRectGetMaxY(lastColumnItemRect);
 	if (lastColumnItemFrame == 0)
 		return 0;
 	return (lastColumnItemFrame-sectionYStartOffset);
