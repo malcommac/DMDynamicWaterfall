@@ -1,7 +1,7 @@
 pod "DMDynamicWaterfall", :path => "../DMDynamicWaterfall.podspec"
 
-target "Demo" do
-end
-
-target "DemoTests" do
-end
+# target "DMDynamicWaterfallDemo" do
+# end
+# 
+# target "DMDynamicWaterfallDemoTests" do
+# end
