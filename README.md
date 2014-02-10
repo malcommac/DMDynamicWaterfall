@@ -5,13 +5,13 @@
 
 ## Usage
 
-A demonstration of UICollectionView with waterfall (pinterest like) layout and UIKit Dynamics. Uses tiling in order to maintain high-performance even with ten thousand cells.
+A demonstration of UICollectionView with waterfall (pinterest like) layout and UIKit Dynamics (optionally). Uses tiling in order to maintain high-performance even with ten thousand cells.
 
 ![Animation](https://raw2.github.com/malcommac/DMDynamicWaterfall/master/example_movie.gif)
 
 ## Requirements
 
-iOS 7 SDK
+iOS 7 SDK (this library is also compatible with iOS 6 SDK, but without UIDynamic).
 
 ## Installation
 
