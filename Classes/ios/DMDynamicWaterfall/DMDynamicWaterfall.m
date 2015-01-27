@@ -37,7 +37,7 @@
 	NSDictionary            *headerFooterItemAttributes;
 	UIDynamicAnimator		*dynamicAnimator;
 	NSMutableSet			*visibleIndexPathsSet;
-	CGFloat					 latestDelta;
+	CGFloat					latestDelta;
 }
 
 @end
@@ -54,7 +54,8 @@
 
 - (void)setDynamic:(BOOL)dynamic {
     if (![UIDynamicAnimator class]) {
-        _dynamic = NO; return;
+        _dynamic = NO;
+        return;
     }
     
 	if (_dynamic != dynamic) {
@@ -99,8 +100,25 @@
 
 - (CGRect)prepareSectionLayout:(NSUInteger) sectionIdx withNumberOfItems:(NSUInteger) numberOfItems {
 	UICollectionView *cView = self.collectionView;
-	UIEdgeInsets sectionInsets = [self.dataSource collectionView:cView layout:self insetForSectionAtIndex:sectionIdx];
-	UIEdgeInsets interItemInsets = [self.dataSource collectionView:cView layout:self insetForItemsInSection:sectionIdx];
+    
+    UIEdgeInsets sectionInsets = UIEdgeInsetsZero;
+
+    if([self.delegate respondsToSelector:@selector(collectionView:layout:insetForSectionAtIndex:)]){
+        sectionInsets = [self.delegate collectionView:cView layout:self insetForSectionAtIndex:sectionIdx];
+    }
+//    UIEdgeInsets interItemInsets = UIEdgeInsetsZero;
+    CGFloat lineSpacing = 0.0f;
+    CGFloat interitemSpacing = 0.0f;
+//    if([self.delegate respondsToSelector:@selector(collectionView:layout:insetForItemsInSection:)]){
+//        interItemInsets = [self.delegate collectionView:cView layout:self insetForItemsInSection:sectionIdx];
+//    }
+    if([self.delegate respondsToSelector:@selector(collectionView:layout:minimumInteritemSpacingForSectionAtIndex:)]){
+        interitemSpacing = [self.delegate collectionView:cView layout:self minimumInteritemSpacingForSectionAtIndex:sectionIdx];
+    }
+    
+    if([self.delegate respondsToSelector:@selector(collectionView:layout:minimumLineSpacingForSectionAtIndex:)]){
+        lineSpacing = [self.delegate collectionView:cView layout:self minimumLineSpacingForSectionAtIndex:sectionIdx];
+    }
 	
 	NSIndexPath *sectionPath = [NSIndexPath indexPathWithIndex:sectionIdx];
 	
@@ -110,10 +128,10 @@
 	sectionRect.origin.x = sectionInsets.left;
 	sectionRect.origin.y = CGRectGetMaxY(previousSectionRect)+sectionInsets.top;
 	
-	NSUInteger numberOfColumns = [self.dataSource collectionView:cView layout:self numberOfColumnsInSection:sectionIdx];
+	NSUInteger numberOfColumns = [self.delegate collectionView:cView layout:self numberOfColumnsInSection:sectionIdx];
 	sectionRect.size.width =	CGRectGetWidth(cView.frame) - (sectionInsets.left + sectionInsets.right);
 	
-	CGFloat columnSpace = sectionRect.size.width - ((interItemInsets.left*(numberOfColumns-1)) + (interItemInsets.left*(numberOfColumns-1)));
+	CGFloat columnSpace = sectionRect.size.width - (interitemSpacing * (numberOfColumns-1));
 	CGFloat columnWidth = (columnSpace/numberOfColumns);
 	
 	// store space for each column
@@ -125,7 +143,11 @@
 	CGRect headerFrame;
 	headerFrame.origin = sectionRect.origin;
 	headerFrame.size.width = sectionRect.size.width;
-	headerFrame.size.height = [self.dataSource collectionView:cView layout:self heightForHeaderAtIndexPath:sectionPath];
+    headerFrame.size.height = 0.0f;
+    
+    if([self.delegate respondsToSelector:@selector(collectionView:layout:heightForHeaderAtIndexPath:)]){
+        headerFrame.size.height = [self.delegate collectionView:cView layout:self heightForHeaderAtIndexPath:sectionPath];
+    }
 	
 	UICollectionViewLayoutAttributes *headerAttributes = [UICollectionViewLayoutAttributes
 															  layoutAttributesForSupplementaryViewOfKind: UICollectionElementKindSectionHeader
@@ -141,20 +163,22 @@
 	// #3: Define the rect of the of each item
 	for (NSUInteger itemIdx = 0; itemIdx < numberOfItems; ++itemIdx) {
 		NSIndexPath *itemPath = [NSIndexPath indexPathForItem:itemIdx inSection:sectionIdx];
-		CGSize itemSize = [self.dataSource collectionView:cView layout:self sizeForItemAtIndexPath:itemPath];
+		CGSize itemSize = [self.delegate collectionView:cView layout:self sizeForItemAtIndexPath:itemPath];
 		
 		NSUInteger destColumnIdx = [self preferredColumnIndexInSection:sectionIdx];
 		NSUInteger destRowInColumn = [self numberOfItemsInColumn:destColumnIdx ofSection:sectionIdx];
 		CGFloat lastItemInColumnOffset = [self lastItemOffsetInColumn: destColumnIdx inSection: sectionIdx];
 		
 		CGRect itemRect;
-		itemRect.origin.x = sectionRect.origin.x +
-							(destColumnIdx * interItemInsets.left) +
-							(destColumnIdx * interItemInsets.right) +
-							(destColumnIdx * columnWidth);
-		itemRect.origin.y = lastItemInColumnOffset +
-							interItemInsets.top + (destRowInColumn == 0 ? interItemInsets.top : 0.0f) +
-							(destRowInColumn > 0 ? interItemInsets.bottom : 0.0f);
+//		itemRect.origin.x = sectionRect.origin.x +
+//							(destColumnIdx * interItemInsets.left) +
+//							(destColumnIdx * interItemInsets.right) +
+//							(destColumnIdx * columnWidth);
+//		itemRect.origin.y = lastItemInColumnOffset +
+//							interItemInsets.top + (destRowInColumn == 0 ? interItemInsets.top : 0.0f) +
+//							(destRowInColumn > 0 ? interItemInsets.bottom : 0.0f);
+        itemRect.origin.x = sectionRect.origin.x + destColumnIdx * (interitemSpacing + columnWidth);
+        itemRect.origin.y = lastItemInColumnOffset + (destRowInColumn > 0 ? lineSpacing: 0.0f);
 		itemRect.size.width = columnWidth;
 		itemRect.size.height = itemSize.height;
 		
@@ -169,9 +193,12 @@
 	// #3 Define the rect of the footer
 	CGRect footerFrame;
 	footerFrame.origin.x = headerFrame.origin.x;
-	footerFrame.origin.y = [self heightOfItemsInSection:sectionIdx]+interItemInsets.bottom;
+	footerFrame.origin.y = [self heightOfItemsInSection:sectionIdx] + lineSpacing;
 	footerFrame.size.width = headerFrame.size.width;
-	footerFrame.size.height = [self.dataSource collectionView:cView layout:self heightForFooterAtIndexPath:sectionPath];
+    footerFrame.size.height = 0.0f;
+    if([self.delegate respondsToSelector:@selector(collectionView:layout:heightForFooterAtIndexPath:)]){
+        footerFrame.size.height = [self.delegate collectionView:cView layout:self heightForFooterAtIndexPath:sectionPath];
+    }
 	
 	UICollectionViewLayoutAttributes *footerAttributes = [UICollectionViewLayoutAttributes
 															layoutAttributesForSupplementaryViewOfKind: UICollectionElementKindSectionFooter

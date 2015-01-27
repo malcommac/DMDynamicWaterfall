@@ -31,7 +31,9 @@
 
 @class  DMDynamicWaterfall;
 
-@protocol DMDynamicWaterfallDatasource <UICollectionViewDelegateFlowLayout>
+@protocol DMDynamicWaterfallDelegate <UICollectionViewDelegateFlowLayout>
+
+@required
 
 /**
  *  Return the number of columns to show in section.
@@ -43,8 +45,11 @@
  *
  *  @return the number of sections in collection view
  */
-- (NSUInteger) collectionView:(UICollectionView *) aCollectionView layout:(DMDynamicWaterfall *) aLayout
-	 numberOfColumnsInSection:(NSUInteger) aSectionIdx;
+
+- (NSUInteger)collectionView:(UICollectionView *)aCollectionView layout:(DMDynamicWaterfall *)aLayout
+	 numberOfColumnsInSection:(NSUInteger)aSectionIdx;
+
+@optional
 
 /**
  *  Return the insets to mantain for each section
@@ -55,8 +60,9 @@
  *
  *  @return insets for target section
  */
-- (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
-	   insetForItemsInSection:(NSUInteger) aSectionIdx;
+
+
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForItemsInSection:(NSUInteger)aSectionIdx;
 
 /**
  *  Height of the header for a section (0 to disable it)
@@ -67,8 +73,7 @@
  *
  *  @return the height of the header
  */
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
-		heightForHeaderAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForHeaderAtIndexPath:(NSIndexPath *)indexPath;
 
 
 /**
@@ -80,8 +85,7 @@
  *
  *  @return the height of the footer
  */
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout
-		heightForFooterAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForFooterAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -90,7 +94,7 @@
 /**
  *  Datasource for dynamic waterfall layout
  */
-@property (nonatomic, assign) id <DMDynamicWaterfallDatasource>	dataSource;
+@property (nonatomic, weak) id <DMDynamicWaterfallDelegate>	delegate;
 
 /**
  *  Yes to enable UIKitDynamics behavior for this layout
