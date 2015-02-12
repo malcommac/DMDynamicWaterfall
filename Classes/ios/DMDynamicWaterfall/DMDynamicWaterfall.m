@@ -78,11 +78,12 @@
  *  Remove the override fixed wrong animation bug of the collectionView add datasource use
  *  'insertItemsAtIndexPaths:' method
  */
-//- (CGSize)collectionViewContentSize {
-//	CGRect lastSectionRect = [[sectionRects lastObject] CGRectValue];
-//	CGSize size = CGSizeMake(CGRectGetWidth(self.collectionView.frame),CGRectGetMaxY(lastSectionRect));
-//	return size;
-//}
+- (CGSize)collectionViewContentSize {
+    [super collectionViewContentSize];
+	CGRect lastSectionRect = [[sectionRects lastObject] CGRectValue];
+	CGSize size = CGSizeMake(CGRectGetWidth(self.collectionView.frame),CGRectGetMaxY(lastSectionRect));
+	return size;
+}
 
 - (void)prepareLayout {
 	NSUInteger numberOfSections = self.collectionView.numberOfSections;
