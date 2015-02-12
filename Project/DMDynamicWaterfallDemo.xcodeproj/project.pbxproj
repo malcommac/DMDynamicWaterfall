@@ -14,9 +14,6 @@
 		21BDB3DA187D85E100A10B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BDB3D9187D85E100A10B9A /* main.m */; };
 		21BDB3DE187D85E100A10B9A /* DMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BDB3DD187D85E100A10B9A /* DMAppDelegate.m */; };
 		21BDB3E0187D85E100A10B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21BDB3DF187D85E100A10B9A /* Images.xcassets */; };
-		21BDB3E7187D85E100A10B9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BDB3E6187D85E100A10B9A /* XCTest.framework */; };
-		21BDB3E8187D85E100A10B9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BDB3CD187D85E100A10B9A /* Foundation.framework */; };
-		21BDB3E9187D85E100A10B9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BDB3D1187D85E100A10B9A /* UIKit.framework */; };
 		21BDB403187D862200A10B9A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BDB401187D862200A10B9A /* MainViewController.m */; };
 		21BDB404187D862200A10B9A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BDB402187D862200A10B9A /* MainViewController.xib */; };
 		21BDB408187D882900A10B9A /* TestCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BDB407187D882900A10B9A /* TestCollectionViewCell.m */; };
@@ -24,16 +21,6 @@
 		21CDB3D61880BA2700DBCEE9 /* TestCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDB3D51880BA2700DBCEE9 /* TestCollectionFooterView.m */; };
 		5E4ADCCA56E548D58334ED4A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1099FEDCBB45CFA13DE587 /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		21BDB3EA187D85E100A10B9A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21BDB3C2187D85E100A10B9A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 21BDB3C9187D85E100A10B9A;
-			remoteInfo = DMDynamicWaterfallDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		21BDB3CA187D85E100A10B9A /* DMDynamicWaterfallDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMDynamicWaterfallDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +34,6 @@
 		21BDB3DC187D85E100A10B9A /* DMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMAppDelegate.h; sourceTree = "<group>"; };
 		21BDB3DD187D85E100A10B9A /* DMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMAppDelegate.m; sourceTree = "<group>"; };
 		21BDB3DF187D85E100A10B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		21BDB3E5187D85E100A10B9A /* DMDynamicWaterfallDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DMDynamicWaterfallDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21BDB3E6187D85E100A10B9A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21BDB400187D862200A10B9A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		21BDB401187D862200A10B9A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -58,8 +44,9 @@
 		21CDB3D21880AA8C00DBCEE9 /* TestCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionHeaderView.m; sourceTree = "<group>"; };
 		21CDB3D41880BA2700DBCEE9 /* TestCollectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCollectionFooterView.h; sourceTree = "<group>"; };
 		21CDB3D51880BA2700DBCEE9 /* TestCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionFooterView.m; sourceTree = "<group>"; };
-		347449BE93E04E2F86F79EDE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		6A1099FEDCBB45CFA13DE587 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD16DD1862B2A412CA149D0D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CA4C8EF9F1E9585541574BE7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,16 +61,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21BDB3E2187D85E100A10B9A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				21BDB3E7187D85E100A10B9A /* XCTest.framework in Frameworks */,
-				21BDB3E9187D85E100A10B9A /* UIKit.framework in Frameworks */,
-				21BDB3E8187D85E100A10B9A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,7 +70,7 @@
 				21BDB3D3187D85E100A10B9A /* DMDynamicWaterfallDemo */,
 				21BDB3CC187D85E100A10B9A /* Frameworks */,
 				21BDB3CB187D85E100A10B9A /* Products */,
-				347449BE93E04E2F86F79EDE /* Pods.xcconfig */,
+				42AE274BCE4970C3D9626177 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				21BDB3CA187D85E100A10B9A /* DMDynamicWaterfallDemo.app */,
-				21BDB3E5187D85E100A10B9A /* DMDynamicWaterfallDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,6 +141,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		42AE274BCE4970C3D9626177 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CA4C8EF9F1E9585541574BE7 /* Pods.debug.xcconfig */,
+				BD16DD1862B2A412CA149D0D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,24 +172,6 @@
 			productReference = 21BDB3CA187D85E100A10B9A /* DMDynamicWaterfallDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		21BDB3E4187D85E100A10B9A /* DMDynamicWaterfallDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21BDB3F9187D85E100A10B9A /* Build configuration list for PBXNativeTarget "DMDynamicWaterfallDemoTests" */;
-			buildPhases = (
-				21BDB3E1187D85E100A10B9A /* Sources */,
-				21BDB3E2187D85E100A10B9A /* Frameworks */,
-				21BDB3E3187D85E100A10B9A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				21BDB3EB187D85E100A10B9A /* PBXTargetDependency */,
-			);
-			name = DMDynamicWaterfallDemoTests;
-			productName = DMDynamicWaterfallDemoTests;
-			productReference = 21BDB3E5187D85E100A10B9A /* DMDynamicWaterfallDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -214,11 +181,6 @@
 				CLASSPREFIX = DM;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = danielemargutti;
-				TargetAttributes = {
-					21BDB3E4187D85E100A10B9A = {
-						TestTargetID = 21BDB3C9187D85E100A10B9A;
-					};
-				};
 			};
 			buildConfigurationList = 21BDB3C5187D85E100A10B9A /* Build configuration list for PBXProject "DMDynamicWaterfallDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -233,7 +195,6 @@
 			projectRoot = "";
 			targets = (
 				21BDB3C9187D85E100A10B9A /* DMDynamicWaterfallDemo */,
-				21BDB3E4187D85E100A10B9A /* DMDynamicWaterfallDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -246,13 +207,6 @@
 				21BDB3D8187D85E100A10B9A /* InfoPlist.strings in Resources */,
 				21BDB404187D862200A10B9A /* MainViewController.xib in Resources */,
 				21BDB3E0187D85E100A10B9A /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21BDB3E3187D85E100A10B9A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1A8F62E40334436BB98EC74 /* Check Pods Manifest.lock */ = {
@@ -305,22 +259,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21BDB3E1187D85E100A10B9A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		21BDB3EB187D85E100A10B9A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 21BDB3C9187D85E100A10B9A /* DMDynamicWaterfallDemo */;
-			targetProxy = 21BDB3EA187D85E100A10B9A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		21BDB3D6187D85E100A10B9A /* InfoPlist.strings */ = {
@@ -408,7 +347,7 @@
 		};
 		21BDB3F7187D85E100A10B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 347449BE93E04E2F86F79EDE /* Pods.xcconfig */;
+			baseConfigurationReference = CA4C8EF9F1E9585541574BE7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -423,7 +362,7 @@
 		};
 		21BDB3F8187D85E100A10B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 347449BE93E04E2F86F79EDE /* Pods.xcconfig */;
+			baseConfigurationReference = BD16DD1862B2A412CA149D0D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -433,48 +372,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		21BDB3FA187D85E100A10B9A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DMDynamicWaterfallDemo.app/DMDynamicWaterfallDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DMDynamicWaterfallDemo/DMDynamicWaterfallDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DMDynamicWaterfallDemoTests/DMDynamicWaterfallDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		21BDB3FB187D85E100A10B9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DMDynamicWaterfallDemo.app/DMDynamicWaterfallDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DMDynamicWaterfallDemo/DMDynamicWaterfallDemo-Prefix.pch";
-				INFOPLIST_FILE = "DMDynamicWaterfallDemoTests/DMDynamicWaterfallDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -495,15 +392,6 @@
 			buildConfigurations = (
 				21BDB3F7187D85E100A10B9A /* Debug */,
 				21BDB3F8187D85E100A10B9A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		21BDB3F9187D85E100A10B9A /* Build configuration list for PBXNativeTarget "DMDynamicWaterfallDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21BDB3FA187D85E100A10B9A /* Debug */,
-				21BDB3FB187D85E100A10B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

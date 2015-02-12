@@ -17,7 +17,7 @@
 #define kTestCollectionViewHeaderID	@"kTestCollectionViewHeaderID"
 #define kTestCollectionViewFooterID	@"kTestCollectionViewFooterID"
 
-@interface MainViewController () <UICollectionViewDataSource,DMDynamicWaterfallDatasource> {
+@interface MainViewController () <UICollectionViewDataSource,DMDynamicWaterfallDelegate> {
 	UICollectionView		*waterfallCollectionView;
 	DMDynamicWaterfall		*waterfallLayout;
 	
@@ -60,7 +60,7 @@ UIColor *randomColor() {
 	[self fillUpCollectionViewWithSampleData];
 	
 	waterfallLayout = [[DMDynamicWaterfall alloc] init];
-	waterfallLayout.dataSource = self;
+	waterfallLayout.delegate = self;
 	waterfallCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
 												 collectionViewLayout:waterfallLayout];
 	[waterfallCollectionView registerClass: [TestCollectionViewCell class]
@@ -135,10 +135,18 @@ UIColor *randomColor() {
 	return [((NSValue*)heightsForItems[indexPath.section][indexPath.item]) CGSizeValue];
 }
 
-- (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForItemsInSection:(NSUInteger)aSectionIdx {
-	// with valid insets and dynamic enabled everything bounce without a logic (?)
-	// why?
-	return UIEdgeInsetsMake(0, 0, 0, 0);
+//- (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForItemsInSection:(NSUInteger)aSectionIdx {
+//	// with valid insets and dynamic enabled everything bounce without a logic (?)
+//	// why?
+//	return UIEdgeInsetsMake(0, 0, 0, 0);
+//}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 10.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 10.0f;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
