@@ -148,15 +148,15 @@
 		CGFloat lastItemInColumnOffset = [self lastItemOffsetInColumn: destColumnIdx inSection: sectionIdx];
 		
 		CGRect itemRect;
-		itemRect.origin.x = sectionRect.origin.x +
+		itemRect.origin.x = floor(sectionRect.origin.x +
 							(destColumnIdx * interItemInsets.left) +
 							(destColumnIdx * interItemInsets.right) +
-							(destColumnIdx * columnWidth);
-		itemRect.origin.y = lastItemInColumnOffset +
+							(destColumnIdx * columnWidth));
+		itemRect.origin.y = floor(lastItemInColumnOffset +
 							interItemInsets.top + (destRowInColumn == 0 ? interItemInsets.top : 0.0f) +
-							(destRowInColumn > 0 ? interItemInsets.bottom : 0.0f);
-		itemRect.size.width = columnWidth;
-		itemRect.size.height = itemSize.height;
+							(destRowInColumn > 0 ? interItemInsets.bottom : 0.0f));
+		itemRect.size.width = ceil(columnWidth);
+		itemRect.size.height = ceil(itemSize.height);
 		
 		UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:itemPath];
 		itemAttributes.frame = itemRect;
